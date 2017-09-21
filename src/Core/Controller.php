@@ -49,10 +49,10 @@ abstract class Controller
     protected function initView(Router $router)
     {
         $module = str_replace('\Controller\Controller', '', get_class($this));
-        $module = str_replace('Bookacamp\\', '', $module);
+        $module = str_replace('Engine\\', '', $module);
 
         $locale = isset($this->params['locale']) ? $this->params['locale'] : '';
-        $view = '\\Bookacamp\\' . $module . '\\View\\View';
+        $view = '\\Engine\\' . $module . '\\View\\View';
 
         $component = str_replace('\\', '/', $module);
         $this->view = new $view($component, $router, $locale);
@@ -77,7 +77,7 @@ abstract class Controller
             $controller->run();
         } else {
             list ($component, $controller) = Path::separate($route['controller']);
-            $class = '/Bookacamp/' . $component . '/Controller/' . $controller;
+            $class = '/Engine/' . $component . '/Controller/' . $controller;
             $class = str_replace('/', '\\', $class); // linux / window tweak
 
             if (!class_exists($class)) {
