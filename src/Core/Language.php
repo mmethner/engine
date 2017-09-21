@@ -6,7 +6,7 @@
  */
 namespace Engine\Core;
 
-use Engine\Core\Tools\Path;
+use Engine\Tools\Path;
 use Trans;
 
 class Language
@@ -119,7 +119,7 @@ class Language
      *
      * @return array
      */
-    private function detect()
+    private function detect(): array
     {
         $langs = [];
         if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
