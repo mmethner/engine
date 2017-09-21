@@ -78,25 +78,6 @@ class Validation
     }
 
     /**
-     * returns all field ids with error and prepares messages for notification widget
-     *
-     * @return array
-     */
-    public function forAjax()
-    {
-        $fields = [];
-        array_walk_recursive($this->errors, function ($message, $key) use (&$fields) {
-            $fields[] = $key;
-            if ($message !== '') {
-                // @todo no core
-                //Notification::warning($message);
-            }
-        });
-
-        return $fields;
-    }
-
-    /**
      * @param bool $withResets
      * @return array
      */
