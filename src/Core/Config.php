@@ -40,8 +40,6 @@ class Config
 
         $this->loadConfig($this->root . '/config/config.yml', $this->root . '/config/.config.yml');
         $this->loadRouter($this->root . '/config/routes.yml');
-
-        Debug::message(static::$config, 'config');
     }
 
     /**

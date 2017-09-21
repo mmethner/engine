@@ -84,7 +84,7 @@ class View
         if (array_key_exists($name, $this->data)) {
             return $this->data[$name];
         } else {
-            Debug::message('undefined property ' . $name, 'warning');
+            Error::log('undefined property ' . $name);
             return '';
         }
     }

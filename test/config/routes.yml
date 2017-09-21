@@ -1,4 +1,4 @@
-root:
-  resource: "/Dummy/Config/config.yml"
+base:
+  resource: "/Base/Config/config.yml"
   prefix: ""
 

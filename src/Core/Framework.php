@@ -37,8 +37,6 @@ class Framework
      */
     public static function init()
     {
-        Debug::init();
-
         $framework = new self();
         $framework->config = new Config(ENGINE_APP_ROOT);
         $framework->router = $framework->config->getRouter();
@@ -54,10 +52,6 @@ class Framework
      */
     private function setup()
     {
-        if (!Config::get('debugbar', 'enable')) {
-            Debug::disable();
-        }
-
         if (!Config::get('database', 'enable')) {
             Database::disable();
         }

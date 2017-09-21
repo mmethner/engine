@@ -156,7 +156,7 @@ class Language
         }
 
         if (empty($this->applied)) {
-            Debug::message('no language file was found', 'warning');
+            Error::log('no language file was found');
         }
 
         $this->mergeTranslation($this->langFilePath);

@@ -39,8 +39,6 @@ abstract class Controller
         $this->params = $params;
 
         $this->initView($router);
-
-        Debug::message($params, 'controller-params');
     }
 
     /**
@@ -71,8 +69,6 @@ abstract class Controller
     public static function dispatch(Router $router)
     {
         $route = $router->match();
-
-        Debug::message($route, 'route');
 
         if (empty($route)) {
             $controller = new \Engine\Base\Controller\Controller($router);

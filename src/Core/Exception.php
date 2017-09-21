@@ -187,16 +187,14 @@ h2 {
 	color: #ffffff;
 }
 
-h3 {
-	color: #2C3E50;
-}
 </style>
 </head>
 <body>
 	<h1>Oh Shit.</h1>
 	<h2>The internet is broken.<br/> Engine detected an unrecoverable error.</h2>
-	<h3>{$params['message']}</h3>
 	<pre>
+    	<h3>{$params['message']}</h3>
+    	<hr>
 	    {$context}
     </pre>
 </body>
