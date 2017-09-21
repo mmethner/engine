@@ -4,7 +4,7 @@
   "description": "Simple PHP Framework",
   "keywords": ["php", "framework", "api", "backend", "php7.2"],
   "homepage": "https://github.com/mmethner/engine",
-  "license" : "",
+  "license" : "MIT",
   "authors" : [
     {
       "name": "Mathias Methner",
