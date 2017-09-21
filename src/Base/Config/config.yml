@@ -1,0 +1,2 @@
+routes:
+  docu: ['/documentation', 'Base::Controller', documentationAction]

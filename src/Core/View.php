@@ -7,7 +7,7 @@
 
 namespace Engine\Core;
 
-use Engine\Core\Tools\Path;
+use Engine\Tools\Path;
 
 class View
 {
@@ -146,8 +146,8 @@ class View
         }
     }
 
-    /** @noinspection PhpUnusedParameterInspection
-     * @param string $template e.g. Core::skeleton-content.phtml
+    /** @noinspection PhpUnusedParameterInspection *
+     * @param string $template
      * @param array $content
      */
     public function renderSnippet(string $template, array $content = [])

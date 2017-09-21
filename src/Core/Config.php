@@ -77,8 +77,7 @@ class Config
      */
     private function loadRouter($ymlFile)
     {
-        // @todo find a solution for that
-        //$this->router->map('/', 'Root::Controller', 'rootAction', 'Root::Controller::rootAction');
+        $this->router->map('/', 'Base::Controller', 'defaultAction', 'Base::Controller::defaultAction');
 
         $files = Spyc::YAMLLoad($ymlFile);
         foreach ($files as $component => $config) {

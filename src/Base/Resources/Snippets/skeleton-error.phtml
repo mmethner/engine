@@ -1,0 +1,28 @@
+<?php
+/*
+ * This file is part of the Engine framework.
+ * (c) Mathias Methner <mathiasmethner@gmail.com>
+ * Please view the LICENSE file
+ */
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Engine\Core</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="robots" content="noindex, nofollow"/>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="pragma" content="no-cache">
+    <?=$this->favicon('root::favicon.png');?>
+    <?=$this->stylesheet('root::exception.css');?>
+    <?=$this->jsHead();?>
+</head>
+<body>
+<h1><?=\Trans::late('Sorry, something went wrong');?></h1>
+<h2><?=\Trans::late('We apologize, but fortunately we catched the error and are already up to solve that problem for you.');?></h2>
+<h3><?=$this->message;?></h3>
+<hr>
+<?=$this->content();?>
+<?=$this->jsFoot();?>
+</body>
+</html>

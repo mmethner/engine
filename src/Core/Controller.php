@@ -6,7 +6,7 @@
  */
 namespace Engine\Core;
 
-use Engine\Core\Tools\Path;
+use Engine\Tools\Path;
 
 abstract class Controller
 {
@@ -75,7 +75,7 @@ abstract class Controller
         Debug::message($route, 'route');
 
         if (empty($route)) {
-            $controller = new \Engine\Root\Controller\Controller($router);
+            $controller = new \Engine\Base\Controller\Controller($router);
             $controller->http404Action();
             $controller->action = 'http404Action';
             $controller->run();
@@ -85,7 +85,7 @@ abstract class Controller
             $class = str_replace('/', '\\', $class); // linux / window tweak
 
             if (!class_exists($class)) {
-                $controller = new \Engine\Root\Controller\Controller($router, $route['params']);
+                $controller = new \Engine\Base\Controller\Controller($router, $route['params']);
                 $controller->frameworkAction();
                 $controller->action = 'frameworkAction';
                 $controller->run();
@@ -94,7 +94,7 @@ abstract class Controller
                 $route['action']
             ])
             ) {
-                $controller = new \Engine\Root\Controller\Controller($router, $route['params']);
+                $controller = new \Engine\Base\Controller\Controller($router, $route['params']);
                 $controller->frameworkAction();
                 $controller->action = 'frameworkAction';
                 $controller->run();
