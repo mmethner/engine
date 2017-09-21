@@ -4,6 +4,7 @@
  * (c) Mathias Methner <mathiasmethner@gmail.com>
  * Please view the LICENSE file
  */
+
 namespace Engine\Core;
 
 class Framework
@@ -25,17 +26,20 @@ class Framework
      *
      * @return void
      */
-    public static function run()
+    public static function run(): void
     {
         $framework = static::init();
-        Controller::dispatch($framework->router);
+        Controller::dispatch(
+            $framework->router,
+            Config::get('core', 'namespace')
+        );
     }
 
     /**
      *
-     * @return Framework
+     * @return \Engine\Core\Framework
      */
-    public static function init()
+    public static function init(): Framework
     {
         $framework = new self();
         $framework->config = new Config(ENGINE_APP_ROOT);
@@ -50,7 +54,7 @@ class Framework
      *
      * @return void
      */
-    private function setup()
+    private function setup(): void
     {
         if (!Config::get('database', 'enable')) {
             Database::disable();

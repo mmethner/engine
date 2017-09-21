@@ -1,7 +1,18 @@
+#
+# this is an example config file
+#
+
 core:
-  url: #will be set later
-  environment: test # values: prod|test
+  #will be set later
+  url:
+  # values: prod|test
+  environment: test
+  # Just leave as is if namespace is not important
+  namespace: \Engine
 
 locale: 
   default: en
   available: [en,de]
+
+database:
+  enable: false

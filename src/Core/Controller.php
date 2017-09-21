@@ -44,9 +44,10 @@ abstract class Controller
     /**
      *
      * @param \Engine\Core\Router $router
+     * @param string $namespace
      * @return void
      */
-    protected function initView(Router $router)
+    protected function initView(Router $router, string $namespace = ''): void
     {
         $module = str_replace('\Controller\Controller', '', get_class($this));
         $module = str_replace('Engine\\', '', $module);
@@ -64,9 +65,10 @@ abstract class Controller
     /**
      *
      * @param Router $router
+     * @param string $namespace
      * @return void
      */
-    public static function dispatch(Router $router)
+    public static function dispatch(Router $router, string $namespace = ''): void
     {
         $route = $router->match();
 
@@ -77,8 +79,16 @@ abstract class Controller
             $controller->run();
         } else {
             list ($component, $controller) = Path::separate($route['controller']);
+            // e.g /Engine/Documentation/Controller/Controller
             $class = '/Engine/' . $component . '/Controller/' . $controller;
-            $class = str_replace('/', '\\', $class); // linux / window tweak
+
+            // linux / window tweak
+            // e.g. \Engine\Documentation\Controller\Controller
+            $class = str_replace('/', '\\', $class);
+
+            // enable apps to use own namespace
+            // e.g. \Engine\App\Documentation\Controller\Controller
+            $class = str_replace('\Engine', $namespace, $class);
 
             if (!class_exists($class)) {
                 $controller = new \Engine\Base\Controller\Controller($router, $route['params']);
@@ -108,7 +118,7 @@ abstract class Controller
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $this->view->render();
     }
