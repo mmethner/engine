@@ -4,11 +4,8 @@
  * (c) Mathias Methner <mathiasmethner@gmail.com>
  * Please view the LICENSE file
  */
-namespace Engine\Core;
 
-use Bookacamp\Common\Context;
-use Bookacamp\Common\Error;
-use Bookacamp\Notification\Notification;
+namespace Engine\Core;
 
 class Exception
 {
@@ -20,9 +17,6 @@ class Exception
      */
     public static function exception(\Throwable $exception)
     {
-        // @todo no core
-        //Notification::flush();
-
         $trace = $exception->getTrace();
         foreach ($trace as $key => $stackPoint) {
             // Converting arguments to their type e.g.
@@ -52,110 +46,11 @@ class Exception
     }
 
     /**
-     *
-     * @param string $message
-     * @return void
-     */
-    public static function html(string $message = ""): void
-    {
-        // clean all content from output buffers
-        while (ob_get_level()) {
-            ob_end_clean();
-        }
-
-        $out = <<<HTML
-<!DOCTYPE html>
-<html>
-<head>
-<title>Engine\Core</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="robots" content="noindex, nofollow" />
-<meta http-equiv="content-type" content="text/html;charset=utf-8">
-<meta http-equiv="pragma" content="no-cache">
-<link rel="icon" href="/root/img/favicon.png" type="image/png">
-<style>
-body {
-	font-family: Arial, sans-serif;
-	font-size: 18px;
-	text-align: center;
-	color: #ffffff;
-	background-color: #2C3E50;
-	margin: 10px;
-}
-
-h1 {
-	font-size: 100px;
-	color: #ff0000;
-}
-
-h2 {
-	font-size: 40px;
-	color: #ffffff;
-}
-
-h3 {
-	color: #2C3E50;
-}
-</style>
-</head>
-<body>
-	<h1>Oh Shit.</h1>
-	<h2>The internet is broken.<br/> As a result, the page you<br/> requested displays this.<br/> Fortunately we are already up<br/> to solve that problem.</h2>
-	<h3>{$message}</h3>
-</body>
-</html>
-HTML;
-        echo $out;
-    }
-
-    /**
-     *
-     * @param array $params
-     * @return void
-     */
-    private static function out(array $params)
-    {
-        static::mail($params);
-
-        if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/api/') !== false) {
-            echo '{status: 0, errors: ["The system detected an error and informed our system administrator."]}';
-            return;
-        }
-
-        static::html($params['message']);
-    }
-
-    /**
-     *
-     * @param array $params
-     * @return void
-     */
-    private static function mail(array $params)
-    {
-        $message = $params['message'] . "\r\n";
-
-        error_log($message);
-
-        $message .= "\r\n";
-        $message .= sprintf("File: %s\r\n", $params['file']);
-        $message .= sprintf("Line: %s\r\n\r\n", $params['line']);
-
-        foreach ($params['trace'] as $key => $value) {
-            $message .= 'trace #' . $key . ': ' . $value . "\r\n";
-        }
-
-        $message .= self::collect();
-
-        // @todo no core
-        //Error::mail('Bookacamp: ' . $params['message'], $message);
-    }
-
-    /**
      * collects data for current request
      *
      * @return string
      */
-    public static function collect()
+    private static function collect()
     {
         $message = '';
 
@@ -207,12 +102,8 @@ HTML;
         if (!empty($_SESSION)) {
             $message .= "\r\n";
             foreach ($_SESSION as $key => $value) {
-                if ($key == 'context' && $value instanceof Context) {
-                    $message .= 'session #user: ' . $value->getUser()->email . "\r\n";
-                    continue;
-                }
-                $message .= 'session #' . $key . ': ' . (is_array($value) ? serialize($value) : print_r($value,
-                        1)) . "\r\n";
+                $message .= 'session #' . $key . ': ' . (is_array($value) ?
+                        serialize($value) : print_r($value,1)) . "\r\n";
             }
         }
 
@@ -232,9 +123,6 @@ HTML;
         }
 
         if ($error['type'] === E_ERROR || $error['type'] === E_RECOVERABLE_ERROR || $error['type'] === E_COMPILE_ERROR) {
-
-            // @todo no core
-            //Notification::flush();
 
             $stackTrace = [];
             foreach (debug_backtrace() as $key => $stackPoint) {
@@ -256,15 +144,64 @@ HTML;
     }
 
     /**
-     * @return array
+     *
+     * @param array $params
+     * @return void
      */
-    public static function stackTrace(): array
+    private static function out(array $params)
     {
-        $stackTrace = [];
-        foreach (debug_backtrace() as $key => $stackPoint) {
-            $stackTrace[] = sprintf('%s: %s', $stackPoint['class'], $stackPoint['function']);
+        // clean all content from output buffers
+        while (ob_get_level()) {
+            ob_end_clean();
         }
-        return $stackTrace;
 
+        $context = static::collect();
+
+        $out = <<<HTML
+<!DOCTYPE html>
+<html>
+<head>
+<title>Engine\Core</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<meta http-equiv="pragma" content="no-cache">
+<link rel="icon" href="/root/img/favicon.png" type="image/png">
+<style>
+body {
+	font-family: Arial, sans-serif;
+	font-size: 18px;
+	text-align: center;
+	color: #ffffff;
+	background-color: #2C3E50;
+	margin: 10px;
+}
+
+h1 {
+	font-size: 100px;
+	color: #ff0000;
+}
+
+h2 {
+	font-size: 40px;
+	color: #ffffff;
+}
+
+h3 {
+	color: #2C3E50;
+}
+</style>
+</head>
+<body>
+	<h1>Oh Shit.</h1>
+	<h2>The internet is broken.<br/> Engine detected an unrecoverable error.</h2>
+	<h3>{$params['message']}</h3>
+	<pre>
+	    {$context}
+    </pre>
+</body>
+</html>
+HTML;
+        echo $out;
     }
 }
