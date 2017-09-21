@@ -9,7 +9,7 @@ To bootstrap your own application, clone the engine example app and follow its d
 
 ## Installation with Composer
 
-@todo
+```composer require mmethner/engine```
 
 ## Credits
 
