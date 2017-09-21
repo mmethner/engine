@@ -1,2 +1,4 @@
 routes:
+  default: ['', 'Base::Controller', defaultAction]
+  root: ['/', 'Base::Controller', defaultAction]
   docu: ['/documentation', 'Base::Controller', documentationAction]
