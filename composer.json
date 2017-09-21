@@ -24,6 +24,9 @@
     "psr-4": {
       "Engine\\": "src/",
       "Engine\\Test\\": "test/"
-    }
+    },
+    "files": [
+      "src/Tools/Trans.php"
+    ]
   }
 }
