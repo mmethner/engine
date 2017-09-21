@@ -2,8 +2,9 @@ Engine PHP Framework
 ========================
 
 Engine is a lightweight PHP Framework to run a website.   
-This package is the core package.   
-To bootstrap your own application, clone the engine example app and follow its documentation:
+This package is the core package.  
+ 
+To bootstrap your own application and see the documentation, clone the engine example app and follow its instructions:
 
 ```git clone https://github.com/mmethner/engine-app```
 
