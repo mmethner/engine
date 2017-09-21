@@ -1,0 +1,4 @@
+root:
+  resource: "/Dummy/Config/config.yml"
+  prefix: ""
+

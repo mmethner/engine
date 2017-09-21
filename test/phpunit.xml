@@ -1,0 +1,5 @@
+<phpunit
+        backupGlobals="true" colors="true"
+        processIsolation="true"
+        bootstrap="./bootstrap.php" verbose="true">
+</phpunit>

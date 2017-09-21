@@ -1,0 +1,29 @@
+{
+  "name": "mmethner/engine",
+  "type": "library",
+  "description": "Simple PHP Framework",
+  "keywords": ["php", "framework", "api", "backend", "php7.2"],
+  "homepage": "https://github.com/mmethner/engine",
+  "license" : "",
+  "authors" : [
+    {
+      "name": "Mathias Methner",
+      "email": "mathiasmethner@gmail.com",
+      "homepage": "https://www.mathiasmethner.de"
+    }
+  ],
+  "require": {
+    "php": ">=7.1.0",
+    "vlucas/spot2": "2.1.7",
+    "mustangostang/spyc": "0.5.x-dev"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Engine\\": "src/",
+      "Engine\\Test\\": "test/"
+    }
+  }
+}

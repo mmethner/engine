@@ -1,0 +1,7 @@
+core:
+  url: #will be set later
+  environment: test # values: prod|test
+
+locale: 
+  default: en
+  available: [en,de]
