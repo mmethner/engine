@@ -13,7 +13,7 @@
     }
   ],
   "require": {
-    "php": ">=7.2.0",
+    "php": ">=7.1.0",
     "vlucas/spot2": "2.1.7",
     "mustangostang/spyc": "0.5.x-dev"
   },
