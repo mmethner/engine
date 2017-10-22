@@ -4,7 +4,6 @@
  * (c) Mathias Methner <mathiasmethner@gmail.com>
  * Please view the LICENSE file
  */
-error_log('mmtest');
 spl_autoload_register(function ($class) {
     // project-specific namespace prefix
     $prefix = 'Engine\\Test\\';
